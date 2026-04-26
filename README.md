@@ -1,114 +1,114 @@
-# Python Learning Projects
+📊 Academic Data Drift & Copy Behavior Analyzer
+🚀 Overview
 
-A collection of Python scripts demonstrating data analysis, educational assessment, and object-oriented programming concepts.
+This project explores how student academic data behaves when copied and modified. It mainly focuses on understanding the difference between shallow copy and deep copy, and how improper copying can lead to data drift and inconsistency.
 
-## Project Structure
+Instead of just performing operations, this program simulates a real-world scenario where university data is duplicated for analysis and then unintentionally altered.
 
-### Day-6.py - Student Performance Analysis System
+🎯 Objective
+Generate random student academic data
+Apply transformations only on copied data
+Analyze statistical changes using NumPy and Pandas
+Detect data drift and identify copy-related issues
+🧠 Key Concept
 
-A comprehensive student performance analysis tool that generates synthetic student data and provides insights into academic performance.
+Not all copies are safe.
+Shallow copy shares internal references, which can unintentionally modify original data. Deep copy avoids this issue.
 
-#### Features
-- **Data Generation**: Creates random student records with marks, attendance, and assignment scores
-- **Student Classification**: Categorizes students into performance tiers:
-  - *At Risk*: Marks < 40 or Attendance < 50%
-  - *Average*: Marks 50-70
-  - *Good*: Marks 71-90
-  - *Top Performer*: Marks > 90 and Attendance > 80%
-- **Statistical Analysis**: Computes mean, median, standard deviation, and correlation
-- **Data Normalization**: Scales marks to 0-1 range
-- **System Insights**: Evaluates overall academic system health
-- **Visualization**: Generates histogram of marks distribution
+🏗️ Data Structure Used
 
-#### Key Functions
-- `generate_data(n)`: Generates performance data for n students
-- `classify_students(data)`: Categorizes students by performance level
-- `analyze_data(df)`: Performs statistical analysis
-- `system_insight(df, categories)`: Determines system health status
+Each student record:
 
-#### Usage
-```bash
-python Day-6.py
-```
-When prompted, enter the last digit of your roll number (determines sample size).
+{
+  "id": int,
+  "marks": int,
+  "attendance": int,
+  "scores": [internal, assignment]
+}
+Stored as a list of dictionaries
+scores is a nested list (important for copy behavior)
+⚙️ Workflow
+1. Data Generation
+Randomly creates 10–15 student records
+2. Copy Creation
+Creates:
+Shallow copy
+Deep copy
+3. Mutation (Applied only on copies)
 
----
+Marks updated using:
 
-### Day-9.py - Inventory Management & Copy Semantics
+marks = marks + sqrt(marks)
+Scores list modified (nested structure)
+Attendance adjusted
 
-Demonstrates the differences between shallow and deep copying in Python through an inventory management system.
+Mutation controlled using:
 
-#### Features
-- **Inventory Management**: Manages product information (laptops, phones)
-- **Discount Application**: Applies percentage discounts and modifies stock
-- **Copy Comparison**: Shows the difference between shallow and deep copies
-- **Data Integrity Analysis**: Compares original vs modified data
+index % (roll_number % 3)
+4. Analysis
+Mean, Median, Standard Deviation (NumPy)
+Manual mean calculation (without NumPy)
+Normalization of marks
 
-#### Key Functions
-- `create_inventory()`: Initializes product inventory
-- `apply_discount(data, roll_number)`: Applies discounts and modifies stock
-- `compare_data(original, modified)`: Counts changes between datasets
+Drift calculation:
 
-#### Usage
-```bash
-python Day-9.py
-```
-When prompted, enter your roll number for discount calculations.
+drift = abs(original_mean - modified_mean)
+5. Pattern Detection
+Detects:
+Stable Data
+Minor Drift
+Critical Drift
+Copy Failure
+📌 Personalization Logic
+Roll number is taken as input
 
-#### Learning Outcome
-This script illustrates:
-- **Shallow Copy**: References nested objects; modifications affect both original and copy
-- **Deep Copy**: Creates independent copies; modifications don't affect the original
+Mutation rule:
 
----
+modify indices where index % (roll_number % 3) == 0
+Ensures unique output for each student
+⚠️ Key Observation
+❌ Shallow Copy Issue
+Shares inner references
+Modifying scores affects original data
+Leads to Copy Failure
+✅ Deep Copy Advantage
+Fully independent copy
+Original data remains unchanged
+📊 Sample Output (Conceptual)
+===== ORIGINAL DATA =====
+...
 
-## Installation
+===== SHALLOW COPY =====
+... (values changed unexpectedly)
 
-### Requirements
-- Python 3.7+
-- pip (Python package manager)
+===== DEEP COPY =====
+... (correct independent modification)
 
-### Dependencies
-Install required packages:
-```bash
-pip install numpy pandas matplotlib
-```
+Drift Value: X.XX
+Tuple: (mean, drift, std_dev)
 
-Or install from requirements file (if available):
-```bash
-pip install -r requirements.txt
-```
+Final Classification: Copy Failure Detected
+🧪 Technologies Used
+Python
+NumPy
+Pandas
+math
+random
+copy module
+📚 Learning Outcome
+Understood the real difference between shallow and deep copy
+Learned how nested structures affect memory behavior
+Applied statistical analysis using NumPy
+Explored concept of data drift in real systems
+Improved debugging and data validation skills
+💡 Final Thought
 
----
+This project shows that:
 
-## How to Run
+Small implementation mistakes (like using shallow copy) can lead to serious data inconsistencies in real-world systems.
 
-1. Navigate to the project directory:
-```bash
-cd path/to/python
-```
+👩‍💻 Author
 
-2. Run any script:
-```bash
-python Day-6.py
-python Day-9.py
-```
-
-3. Follow the on-screen prompts to provide input values.
-
----
-
-## Technologies Used
-
-- **NumPy**: Numerical computing and array operations
-- **Pandas**: Data manipulation and analysis
-- **Matplotlib**: Data visualization
-- **Python Standard Library**: `random`, `math`, `copy`
-
----
-
-## Notes
-
-- All student/inventory data is randomly generated
-- Visualizations are displayed using Matplotlib
-- Both scripts demonstrate fundamental Python concepts in data handling and object copying
+Name: M.Rishitha
+Course: CSE205 – Hands-on Python
+University: SRM University–AP
